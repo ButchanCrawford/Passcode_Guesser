@@ -3,6 +3,7 @@ import random
 #colors used in passcode | The number of tries/ lives a person has 
 COLORS = ["R","G","B","Y","W","O",]
 TRIES = 10
+remaining_attempts = 10
 CODE_LENGTH = 4
 
 #generate code function
@@ -77,15 +78,19 @@ def game():
         guess = guess_code()
         correct_position, incorrect_position =  check_code(guess, code)
 
+        if correct_position != CODE_LENGTH:
+            global remaining_attempts
+            remaining_attempts  -=  1
+
         if correct_position == CODE_LENGTH:
             print(f"You guessed the code in {attempts} attempts")
             break
         
         print(f"Correct Positions: {correct_position} | Incorrect Position: {incorrect_position}")
-        print(f"You Have {attempts} Attempts Remaining.")
+        print(f"You Have {remaining_attempts} Attempts Remaining.")
 
     else:
-            print("Attempts Exausted. The System Was Locked")
+            print("Attempts Exausted. The System Was Locked.")
             print("The Code Was: " *code)
 
 if __name__ == "__main__":
