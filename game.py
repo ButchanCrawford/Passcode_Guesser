@@ -23,10 +23,10 @@ code = generate_code()
 def guess_code():
     while True:
         guess = input("Enter Code: ").upper().split(" ")
-        print(guess)
+        
 
         if len(guess) != CODE_LENGTH:
-            print(f"The Passcode Only Contains {CODE_LENGTH} Characters.")
+            print(f"The Passcode Contains {CODE_LENGTH} Characters.")
             continue
 
         #checking user guess against available characters
@@ -60,7 +60,7 @@ def check_code(guess, actual):
     #matching guess and actual for incorrect position
     for guess_color, actual_color in zip(guess, actual):
         if guess_color in color_counts and color_counts[guess_color] > 0:
-            incorrect_pos =+1
+            incorrect_position += 1
             color_counts[guess_color] -= 1
     
     return correct_position, incorrect_position
@@ -70,7 +70,7 @@ def check_code(guess, actual):
 def game():
     print("System Was Powered On")
     print(f"Please Enter Your Four Character Passcode In No More Than {TRIES} Attempts")
-    print("Valid Characters are:", *COLORS)
+    print("Valid Characters Must Be Seperated With A Space And They Are:", *COLORS)
 
     code = generate_code()
     for attempts in range(1, TRIES + 1):
@@ -82,6 +82,7 @@ def game():
             break
         
         print(f"Correct Positions: {correct_position} | Incorrect Position: {incorrect_position}")
+        print(f"You Have {attempts} Attempts Remaining.")
 
     else:
             print("Attempts Exausted. The System Was Locked")
